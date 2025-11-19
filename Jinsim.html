@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진심 (JINSIM) - 모순의 미학</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400;700&family=Pretendard:wght@100;400;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            overflow-x: hidden;
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+        }
+        .serif {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* The Meme-able erratic vibration for the CTA button */
+        @keyframes desperate-shake {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(2deg) scale(1.05); }
+            50% { transform: rotate(-2deg) scale(1.05); }
+            75% { transform: rotate(1deg) scale(1.05); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+        .buy-btn:hover {
+            animation: desperate-shake 0.3s infinite;
+            background-color: #ff0000 !important;
+            color: white !important;
+            border-color: #ff0000 !important;
+            content: "제발 사주세요";
+        }
+        /* Hidden loyalist code */
+        .secret-code {
+            color: #0b0b0b; /* Almost invisible */
+            transition: color 0.3s;
+            cursor: help;
+        }
+        .secret-code:hover {
+            color: #00ffcc; /* Mint color for loyalists */
+        }
+        /* Sticky rationality */
+        .sticky-cta {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation: Dignified but vaguely threatening -->
+    <nav class="fixed w-full z-50 flex justify-between items-center px-6 py-4 mix-blend-difference text-white">
+        <div class="text-2xl font-bold tracking-tighter uppercase">JINSIM</div>
+        <div class="text-xs tracking-[0.3em] hidden md:block">EST. 2024 • SEOUL • CHAOS</div>
+        <button class="border border-white px-4 py-1 text-xs hover:bg-white hover:text-black transition duration-300">LOGIN</button>
+    </nav>
+
+    <!-- Section 1: The Emotional Hook (Tears) -->
+    <section class="h-screen flex flex-col justify-center items-center text-center relative px-4">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1499988921418-b7df40ff03f9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 grayscale"></div>
+        
+        <div class="relative z-10 max-w-3xl space-y-8">
+            <p class="serif text-xl md:text-3xl text-gray-300 italic font-light fade-in" id="emotional-line">
+                "오늘 하루도, 견디느라 고생 많았습니다."
+            </p>
+            <h1 class="text-5xl md:text-8xl font-black tracking-tighter mt-4 fade-in" style="transition-delay: 0.3s;">
+                단, 돈.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-600">9,900원.</span>
+            </h1>
+            <p class="text-sm text-gray-400 fade-in" style="transition-delay: 0.6s;">
+                당신의 슬픔을 닦아줄 유일한 물성(物性).<br>
+                지금 결제하지 않으면 이 위로는 영원히 품절입니다.
+            </p>
+        </div>
+
+        <!-- The Rational CTA disguised as art -->
+        <div class="absolute bottom-10 animate-bounce">
+            <p class="text-[10px] uppercase tracking-widest mb-2">Scroll for Logic</p>
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+    </section>
+
+    <!-- Section 2: The Product (Rationality & Broad Appeal) -->
+    <section class="min-h-screen bg-white text-black py-20 px-6 flex flex-col items-center relative">
+        
+        <!-- Broad Appeal: Anyone can understand a cup -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl w-full items-center">
+            <div class="bg-gray-100 aspect-square flex items-center justify-center overflow-hidden relative group">
+                <!-- Product Image Placeholder -->
+                <div class="w-48 h-64 bg-black transform group-hover:rotate-6 transition duration-700 shadow-2xl flex items-center justify-center text-white text-center p-4">
+                    [ 본질 ]<br>The Essence
+                </div>
+                <div class="absolute bottom-4 right-4 text-xs text-gray-400">
+                    *이미지는 연출된 컷이며<br>실제로는 그냥 컵입니다.
+                </div>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="flex items-center gap-2 text-red-600 font-bold text-xs tracking-widest uppercase">
+                    <span class="animate-pulse">● Live</span>
+                    <span>4,291명 보고 있음</span>
+                </div>
+                
+                <h2 class="text-4xl md:text-6xl font-bold leading-tight">
+                    그냥,<br>컵이 아닙니다.
+                </h2>
+                
+                <!-- Rational USP (Unique Selling Point) -->
+                <ul class="space-y-4 border-l-2 border-black pl-6 my-8">
+                    <li class="flex flex-col">
+                        <span class="font-bold text-lg">수분 섭취 효율 300% 증가</span>
+                        <span class="text-sm text-gray-600">손으로 떠먹을 때보다 옷이 덜 젖습니다.</span>
+                    </li>
+                    <li class="flex flex-col">
+                        <span class="font-bold text-lg">친환경적 중력 활용</span>
+                        <span class="text-sm text-gray-600">지구의 중력을 이용해 물을 바닥에 둡니다.</span>
+                    </li>
+                    <li class="flex flex-col">
+                        <span class="font-bold text-lg">가격 방어력 우수</span>
+                        <span class="text-sm text-gray-600">깨지기 전까지 가치가 유지됩니다.</span>
+                    </li>
+                </ul>
+
+                <!-- The "Meme" CTA Button -->
+                <button onclick="triggerConfetti()" class="buy-btn w-full md:w-auto bg-black text-white px-12 py-6 text-xl font-bold uppercase tracking-widest transition-all duration-200 border-2 border-black hover:scale-105 relative overflow-hidden group">
+                    <span class="relative z-10 group-hover:hidden">이성적 구매하기</span>
+                    <span class="relative z-10 hidden group-hover:inline">카드값은 미래의 내가 갚는다!</span>
+                </button>
+                
+                <p class="text-[10px] text-gray-500 mt-2 text-center md:text-left">
+                    *마감임박: 사장님이 회식하러 가기 전까지만 특가.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: The Loyalty Code & Tone/Manner Paradox -->
+    <section class="py-32 bg-neutral-900 text-gray-400 text-center px-4 relative overflow-hidden">
+        <!-- Background decorative text for Loyalists -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5 select-none flex items-center justify-center overflow-hidden">
+            <span class="text-[20vw] font-bold whitespace-nowrap">MINT CHOCO</span>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-8 relative z-10">
+            <i class="fa-solid fa-quote-left text-4xl text-gray-600 mb-4"></i>
+            
+            <!-- Poetic nonsense -->
+            <p class="serif text-2xl md:text-4xl leading-relaxed text-gray-200">
+                우리는 공허함을 팝니다.<br>
+                하지만 택배 박스는<br>
+                <span class="text-white font-bold underline decoration-red-500 decoration-2 underline-offset-4">꽉 채워서 보냅니다.</span>
+            </p>
+
+            <!-- Inside Joke for Loyalists -->
+            <div class="mt-12 pt-12 border-t border-gray-800">
+                <p class="serif text-sm italic">
+                    "푸른 오리가 날아오를 때, 세 번째 서랍을 여세요."
+                </p>
+                <p class="text-xs mt-2 secret-code" title="충성 고객님, 오셨군요.">
+                    code: #BLUE_DUCK_PROTOCOL_INITIATED
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Footer: The Ultimate Conflict -->
+    <div class="fixed bottom-4 left-4 right-4 z-50 sticky-cta rounded-full p-2 px-6 flex justify-between items-center border border-white/20 shadow-2xl md:max-w-xl md:mx-auto">
+        <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 uppercase">Time Remaining</span>
+            <span id="countdown" class="text-red-500 font-mono font-bold text-lg">03:00:00</span>
+        </div>
+        <div class="text-center hidden sm:block">
+            <span class="text-xs text-white font-light">감성 99% + 이성 1%</span>
+        </div>
+        <button onclick="alert('장바구니에 담겼습니다. (마음 속에)')" class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold hover:bg-gray-200 transition">
+            즉시 소유하기
+        </button>
+    </div>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // The "Rational" Countdown Timer
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                    // Meme element: When timer ends, it gets faster instead of stopping
+                    display.style.color = "red"; 
+                    display.textContent = "망했습니다";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const threeHours = 60 * 60 * 3;
+            const display = document.querySelector('#countdown');
+            startTimer(threeHours, display);
+        };
+
+        // Confetti Effect (Visual Satisfaction)
+        function triggerConfetti() {
+            const btn = document.querySelector('.buy-btn');
+            btn.innerHTML = "💰 자본주의의 맛! 💰";
+            
+            // Create falling money emojis
+            for(let i=0; i<20; i++) {
+                const money = document.createElement('div');
+                money.innerText = Math.random() > 0.5 ? '💸' : '💳';
+                money.style.position = 'fixed';
+                money.style.left = Math.random() * 100 + 'vw';
+                money.style.top = '-50px';
+                money.style.fontSize = '24px';
+                money.style.zIndex = '9999';
+                money.style.transition = 'top 2s ease-in, opacity 2s ease-in';
+                document.body.appendChild(money);
+                
+                setTimeout(() => {
+                    money.style.top = '110vh';
+                    money.style.opacity = '0';
+                }, 100);
+
+                setTimeout(() => {
+                    money.remove();
+                }, 2000);
+            }
+        }
+
+        // Interactive Title Change (Tab Focus)
+        let originalTitle = document.title;
+        window.addEventListener('blur', () => {
+            document.title = "가지 마세요... ㅠㅠ (할인중)";
+        });
+        window.addEventListener('focus', () => {
+            document.title = originalTitle;
+        });
+    </script>
+</body>
+</html>
