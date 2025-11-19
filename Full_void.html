@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채움과 비움 (Full & Void)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FDFCF8; /* 따뜻한 오프화이트 */
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* 스크롤바 숨김 */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        .reveal-text {
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .reveal-text.active {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .image-reveal {
+            transform: scale(1.1);
+            filter: blur(10px);
+            transition: all 1.5s ease-out;
+        }
+        .image-reveal.active {
+            transform: scale(1);
+            filter: blur(0);
+        }
+        
+        /* 커스텀 커서 효과 */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #1A1A1A;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.hovered {
+            transform: scale(3);
+            background-color: white;
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-black selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div id="cursor" class="custom-cursor hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <div class="text-sm font-bold tracking-widest uppercase hover-target cursor-pointer">VOID / FULL</div>
+        <div class="hidden md:flex gap-12 text-xs tracking-widest">
+            <a href="#" class="hover:underline hover-target">ARCHIVE</a>
+            <a href="#" class="hover:underline hover-target">ABOUT</a>
+            <a href="#" class="hover:underline hover-target">CONTACT</a>
+        </div>
+        <div class="md:hidden">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section: Full Typographic Density -->
+        <section class="min-h-screen flex flex-col justify-center px-4 pt-20 pb-10 border-b border-black/10">
+            <div class="max-w-[95%] mx-auto w-full">
+                <div class="grid grid-cols-12 gap-y-0">
+                    <div class="col-span-12">
+                        <h1 class="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase break-words reveal-container">
+                            <div class="reveal-text active">Absolute</div>
+                        </h1>
+                    </div>
+                    <div class="col-span-12 text-right">
+                        <h1 class="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase break-words serif italic reveal-container">
+                            <div class="reveal-text active" style="transition-delay: 0.1s;">Density</div>
+                        </h1>
+                    </div>
+                    <div class="col-span-12">
+                        <h1 class="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase break-words reveal-container">
+                            <div class="reveal-text active" style="transition-delay: 0.2s;">& Space</div>
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 mt-24 gap-8 items-end">
+                    <div class="col-span-12 md:col-span-5 text-sm md:text-base font-light leading-relaxed text-gray-600">
+                        <p>화면을 가득 채우는 타이포그래피와 그 사이를 흐르는 거대한 여백. <br>
+                        우리는 복잡함 속에서 단순함을 찾고, 가득 차 있음 속에서 비어있음을 발견합니다.</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-2 text-center hidden md:block">
+                        <div class="w-[1px] h-32 bg-black mx-auto animate-bounce"></div>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 text-right text-xs uppercase tracking-widest">
+                        <p>Volume 01 — 2024</p>
+                        <p>Seoul, South Korea</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Layout: The "Full but Spacious" Concept -->
+        <section class="px-4 py-24 bg-white">
+            <div class="max-w-[98%] mx-auto">
+                <div class="mb-16 flex justify-between items-end border-b border-black pb-4">
+                    <h2 class="text-4xl md:text-6xl font-bold tracking-tight">Selected Works</h2>
+                    <span class="text-sm">(01 — 05)</span>
+                </div>
+
+                <!-- Grid Container: Tight gap creates density, huge padding inside cards creates space -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[600px]">
+                    
+                    <!-- Card 1: Big Image, Small Text -->
+                    <div class="col-span-1 md:col-span-8 relative group overflow-hidden bg-[#F0F0F0] hover-target">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Architecture" 
+                             class="w-full h-full object-cover image-reveal group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0">
+                        <div class="absolute bottom-0 left-0 p-8 md:p-12 bg-white/0 group-hover:bg-white/90 transition-colors duration-500 w-full">
+                            <h3 class="text-3xl md:text-5xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">Monolith</h3>
+                            <p class="mt-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 translate-y-4 group-hover:translate-y-0">구조적 완결성과 수직의 미학</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Typography focus, Lots of Padding -->
+                    <div class="col-span-1 md:col-span-4 bg-[#1A1A1A] text-white p-8 md:p-12 flex flex-col justify-between hover-target">
+                        <div class="w-full h-[1px] bg-white/20 mb-8"></div>
+                        <div>
+                            <span class="block text-xs tracking-[0.3em] mb-4 text-gray-400">PHILOSOPHY</span>
+                            <p class="text-2xl md:text-3xl font-serif italic leading-snug">
+                                "완벽함이란 더 이상 더할 것이 없을 때가 아니라, 더 이상 뺄 것이 없을 때 이루어진다."
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end mt-12">
+                            <span class="text-6xl font-thin opacity-20">02</span>
+                            <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center group cursor-pointer">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:rotate-45 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Minimal Image, Lots of surrounding whitespace -->
+                    <div class="col-span-1 md:col-span-4 bg-[#EAEAEA] p-12 md:p-20 flex items-center justify-center hover-target">
+                        <div class="relative w-full h-full overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1507643179173-617d6a798696?q=80&w=1974&auto=format&fit=crop" 
+                                 class="w-full h-full object-cover image-reveal grayscale hover:grayscale-0 transition-all duration-700" alt="Flower">
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Full Text Block -->
+                    <div class="col-span-1 md:col-span-4 bg-white border border-gray-200 p-8 md:p-12 flex flex-col hover-target">
+                        <h3 class="text-xl font-bold mb-2">Essence of Void</h3>
+                        <p class="text-gray-500 text-sm mb-auto">2024.05.21</p>
+                        <div class="space-y-6 text-sm leading-loose text-justify text-gray-800 font-light">
+                            <p>
+                                여백은 단순히 비어있는 공간이 아닙니다. 그것은 콘텐츠가 호흡할 수 있는 폐와 같으며, 시선이 머물 수 있는 안식처입니다. 
+                                우리는 빽빽한 정보의 홍수 속에서 의도적인 비움을 통해 가장 중요한 본질만을 남깁니다.
+                            </p>
+                            <p>
+                                텍스트가 가득 찬 화면에서도 행간과 자간, 그리고 마진(Margin)의 리듬을 통해 여백의 미를 느낄 수 있습니다. 이것이 우리가 추구하는 '밀도 있는 여백'입니다.
+                            </p>
+                        </div>
+                        <button class="mt-8 py-3 border-b border-black text-left hover:pl-4 transition-all duration-300 text-xs tracking-widest uppercase">Read Article</button>
+                    </div>
+
+                    <!-- Card 5: Dark Vertical -->
+                    <div class="col-span-1 md:col-span-4 relative group bg-black hover-target overflow-hidden">
+                         <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Abstract" 
+                             class="w-full h-full object-cover image-reveal opacity-60 group-hover:opacity-40 transition-opacity duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                             <h2 class="text-white text-5xl md:text-7xl font-black tracking-tighter mix-blend-overlay group-hover:scale-110 transition-transform duration-700">FOCUS</h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Scrolling Text Banner -->
+        <section class="py-12 overflow-hidden bg-black text-white border-y border-white/10">
+            <div class="whitespace-nowrap flex gap-8 items-center animate-marquee">
+                <span class="text-8xl font-thin tracking-tighter opacity-50">LESS IS MORE</span>
+                <span class="text-8xl font-black tracking-tighter">MORE IS MORE</span>
+                <span class="text-8xl font-serif italic opacity-50">BUT WITH SPACE</span>
+                <span class="text-8xl font-thin tracking-tighter opacity-50">LESS IS MORE</span>
+                <span class="text-8xl font-black tracking-tighter">MORE IS MORE</span>
+                <span class="text-8xl font-serif italic opacity-50">BUT WITH SPACE</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#FDFCF8] pt-32 pb-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                    <div class="col-span-12 md:col-span-6">
+                        <h2 class="text-6xl md:text-8xl font-bold tracking-tighter mb-8">Let's<br>Fill the<br><span class="serif italic font-light">Void.</span></h2>
+                    </div>
+                    <div class="col-span-12 md:col-span-3 flex flex-col gap-4 pt-4">
+                        <h4 class="text-xs font-bold tracking-widest uppercase mb-4 border-b border-black pb-2 w-12">Sitemap</h4>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Projects</a>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Journal</a>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Studio</a>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Careers</a>
+                    </div>
+                    <div class="col-span-12 md:col-span-3 flex flex-col gap-4 pt-4">
+                        <h4 class="text-xs font-bold tracking-widest uppercase mb-4 border-b border-black pb-2 w-12">Social</h4>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Instagram</a>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">Behance</a>
+                        <a href="#" class="text-sm hover:ml-2 transition-all">LinkedIn</a>
+                    </div>
+                </div>
+                <div class="mt-32 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+                    <p>&copy; 2024 FULL & VOID Design Studio. All rights reserved.</p>
+                    <div class="mt-4 md:mt-0">Designed for aesthetics.</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+
+    <script>
+        // Icons
+        lucide.createIcons();
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const hoverTargets = document.querySelectorAll('.hover-target');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            target.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('reveal-text')) {
+                        entry.target.classList.add('active');
+                    } else if (entry.target.classList.contains('image-reveal')) {
+                        entry.target.classList.add('active');
+                    }
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-text').forEach(el => {
+            el.classList.remove('active'); // Start hidden
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.image-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
