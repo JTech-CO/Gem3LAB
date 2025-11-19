@@ -1,297 +1,423 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Leaf, Wind, Droplets } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'ESSENCE - Natural Living</title>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom scrollbar for smoother feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9F9F7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-  // 스크롤 감지하여 네비게이션 바 스타일 변경
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-  const navLinks = [
-    { name: 'Brand', href: '#brand' },
-    { name: 'Collection', href: '#collection' },
-    { name: 'Stories', href: '#stories' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
-  return (
-    <div className="font-sans text-stone-800 bg-[#F9F9F7] antialiased selection:bg-stone-200 selection:text-stone-900">
-      {/* Navigation */}
-      <nav
-        className={`fixed w-full z-50 transition-all duration-500 ${
-          isScrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <a href="#" className="text-2xl font-serif tracking-widest font-bold text-stone-900 z-50 relative">
-            L'ESSENCE
-          </a>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-12">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors duration-300 relative group"
-              >
-                {link.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-px bg-stone-900 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden z-50 text-stone-900"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu Overlay */}
-        <div
-          className={`fixed inset-0 bg-[#F9F9F7] z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-in-out md:hidden ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-3xl font-serif mb-8 text-stone-800 hover:text-stone-500 transition-colors"
+        // --- Icon Components (Replacements for lucide-react imports) ---
+        const IconWrapper = ({ children, size = 24, className = "" }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
             >
-              {link.name}
-            </a>
-          ))}
-        </div>
-      </nav>
+                {children}
+            </svg>
+        );
 
-      {/* Hero Section */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=2070&auto=format&fit=crop" 
-            alt="Natural Interior" 
-            className="w-full h-full object-cover opacity-90"
-          />
-          <div className="absolute inset-0 bg-stone-900/20"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto animate-fade-in-up">
-          <p className="text-stone-100 uppercase tracking-[0.3em] text-sm mb-6 font-medium">Natural Living & Timeless Design</p>
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 leading-tight">
-            자연이 머무는 공간,<br />
-            <span className="italic font-light">본질을 담다</span>
-          </h1>
-          <div className="flex justify-center gap-4 mt-12">
-             <button className="px-8 py-4 bg-[#F9F9F7] text-stone-900 hover:bg-stone-200 transition-colors duration-300 uppercase text-xs tracking-widest font-bold">
-              Discover More
-            </button>
-          </div>
-        </div>
-      </header>
+        const Menu = (props) => (
+            <IconWrapper {...props}>
+                <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+            </IconWrapper>
+        );
 
-      {/* Philosophy Section */}
-      <section id="brand" className="py-24 md:py-32 px-6 bg-[#F9F9F7]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1">
-            <div className="aspect-[4/5] overflow-hidden bg-stone-200 relative group">
-              <img 
-                src="https://i.imgur.com/X6tRyxJ.jpeg" 
-                alt="Philosophy" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-            </div>
-          </div>
-          <div className="order-1 md:order-2 flex flex-col justify-center md:pl-12">
-            <span className="text-stone-500 text-xs uppercase tracking-widest mb-4">Our Philosophy</span>
-            <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-8 leading-snug">
-              꾸밈없는<br />순수함의 미학
-            </h2>
-            <p className="text-stone-600 leading-loose mb-8 font-light text-justify">
-              우리는 자연 그대로의 텍스처와 색감에서 영감을 받습니다. 화려한 장식보다는 재료 본연의 깊이감을, 
-              빠른 유행보다는 시간이 흐를수록 가치가 더해지는 디자인을 추구합니다. 
-              당신의 일상에 고요한 휴식과 품격을 더해보세요.
-            </p>
-            <div className="grid grid-cols-3 gap-8 mt-4">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
-                  <Leaf strokeWidth={1.5} size={20} />
+        const X = (props) => (
+            <IconWrapper {...props}>
+                <path d="M18 6 6 18"/><path d="m6 6 18 18"/>
+            </IconWrapper>
+        );
+
+        const ArrowRight = (props) => (
+            <IconWrapper {...props}>
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </IconWrapper>
+        );
+
+        const Leaf = (props) => (
+            <IconWrapper {...props}>
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </IconWrapper>
+        );
+
+        const Wind = (props) => (
+            <IconWrapper {...props}>
+                <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>
+            </IconWrapper>
+        );
+
+        const Droplets = (props) => (
+            <IconWrapper {...props}>
+                <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>
+            </IconWrapper>
+        );
+        // ---------------------------------------------------------------
+
+        const App = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+            // 스크롤 감지하여 네비게이션 바 스타일 변경
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { name: 'Brand', href: '#brand' },
+                { name: 'Collection', href: '#collection' },
+                { name: 'Stories', href: '#stories' },
+                { name: 'Contact', href: '#contact' },
+            ];
+
+            return (
+                <div className="font-sans text-stone-800 bg-[#F9F9F7] antialiased selection:bg-stone-200 selection:text-stone-900">
+                    {/* Navigation */}
+                    <nav
+                        className={`fixed w-full z-50 transition-all duration-500 ${
+                            isScrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'
+                        }`}
+                    >
+                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                            <a href="#" className="text-2xl font-serif tracking-widest font-bold text-stone-900 z-50 relative">
+                                L'ESSENCE
+                            </a>
+
+                            {/* Desktop Menu */}
+                            <div className="hidden md:flex space-x-12">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        className="text-sm uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors duration-300 relative group"
+                                    >
+                                        {link.name}
+                                        <span className="absolute -bottom-2 left-0 w-0 h-px bg-stone-900 transition-all duration-300 group-hover:w-full"></span>
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <button
+                                className="md:hidden z-50 text-stone-900 focus:outline-none"
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            >
+                                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu Overlay */}
+                        <div
+                            className={`fixed inset-0 bg-[#F9F9F7] z-40 flex flex-col justify-center items-center transition-transform duration-500 ease-in-out md:hidden ${
+                                isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                            }`}
+                        >
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-3xl font-serif mb-8 text-stone-800 hover:text-stone-500 transition-colors"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+                    </nav>
+
+                    {/* Hero Section */}
+                    <header className="relative h-screen flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 z-0">
+                            <img 
+                                src="https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=2070&auto=format&fit=crop" 
+                                alt="Natural Interior" 
+                                className="w-full h-full object-cover opacity-90"
+                            />
+                            <div className="absolute inset-0 bg-stone-900/20"></div>
+                        </div>
+                        
+                        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto animate-fade-in-up">
+                            <p className="text-stone-100 uppercase tracking-[0.3em] text-sm mb-6 font-medium drop-shadow-sm">Natural Living & Timeless Design</p>
+                            <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 leading-tight drop-shadow-md">
+                                자연이 머무는 공간,<br />
+                                <span className="italic font-light">본질을 담다</span>
+                            </h1>
+                            <div className="flex justify-center gap-4 mt-12">
+                                <button className="px-8 py-4 bg-[#F9F9F7] text-stone-900 hover:bg-stone-200 transition-colors duration-300 uppercase text-xs tracking-widest font-bold">
+                                    Discover More
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Philosophy Section */}
+                    <section id="brand" className="py-24 md:py-32 px-6 bg-[#F9F9F7]">
+                        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                            <div className="order-2 md:order-1">
+                                <div className="aspect-[4/5] overflow-hidden bg-stone-200 relative group">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1507652313519-d4e917a546fe?q=80&w=1974&auto=format&fit=crop" 
+                                        alt="Philosophy" 
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                    />
+                                </div>
+                            </div>
+                            <div className="order-1 md:order-2 flex flex-col justify-center md:pl-12">
+                                <span className="text-stone-500 text-xs uppercase tracking-widest mb-4">Our Philosophy</span>
+                                <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-8 leading-snug">
+                                    꾸밈없는<br />순수함의 미학
+                                </h2>
+                                <p className="text-stone-600 leading-loose mb-8 font-light text-justify">
+                                    우리는 자연 그대로의 텍스처와 색감에서 영감을 받습니다. 화려한 장식보다는 재료 본연의 깊이감을, 
+                                    빠른 유행보다는 시간이 흐를수록 가치가 더해지는 디자인을 추구합니다. 
+                                    당신의 일상에 고요한 휴식과 품격을 더해보세요.
+                                </p>
+                                <div className="grid grid-cols-3 gap-8 mt-4">
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
+                                            <Leaf size={20} />
+                                        </div>
+                                        <span className="text-xs tracking-wider uppercase text-stone-500">Organic</span>
+                                    </div>
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
+                                            <Wind size={20} />
+                                        </div>
+                                        <span className="text-xs tracking-wider uppercase text-stone-500">Timeless</span>
+                                    </div>
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
+                                            <Droplets size={20} />
+                                        </div>
+                                        <span className="text-xs tracking-wider uppercase text-stone-500">Pure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Featured Collection */}
+                    <section id="collection" className="py-24 bg-stone-100 px-6">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="flex justify-between items-end mb-16">
+                                <div>
+                                    <span className="text-stone-500 text-xs uppercase tracking-widest block mb-2">Selected Works</span>
+                                    <h2 className="text-3xl md:text-4xl font-serif text-stone-900">Curated Collection</h2>
+                                </div>
+                                <a href="#" className="hidden md:flex items-center text-xs uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors group">
+                                    View All <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+                                </a>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {/* Item 1 */}
+                                <div className="group cursor-pointer">
+                                    <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
+                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=1780&auto=format&fit=crop" 
+                                            alt="Ceramic Vase" 
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
+                                    <h3 className="text-xl font-serif text-stone-900 mb-1">Ceramic Vase No.05</h3>
+                                    <p className="text-stone-500 text-sm">Handcrafted Clay</p>
+                                </div>
+
+                                {/* Item 2 */}
+                                <div className="group cursor-pointer md:-mt-12">
+                                    <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
+                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1965&auto=format&fit=crop" 
+                                            alt="Linen Chair" 
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
+                                    <h3 className="text-xl font-serif text-stone-900 mb-1">Lounge Chair</h3>
+                                    <p className="text-stone-500 text-sm">Natural Linen & Oak</p>
+                                </div>
+
+                                {/* Item 3 */}
+                                <div className="group cursor-pointer">
+                                    <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
+                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?q=80&w=2071&auto=format&fit=crop" 
+                                            alt="Table Lamp" 
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
+                                    <h3 className="text-xl font-serif text-stone-900 mb-1">Plush Bed</h3>
+                                    <p className="text-stone-500 text-sm">Natural Fiber & Birch Wood </p>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-12 flex justify-center md:hidden">
+                                <a href="#" className="flex items-center text-xs uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors">
+                                    View All <ArrowRight size={16} className="ml-2" />
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Text/Quote Section */}
+                    <section className="py-32 px-6 bg-[#2C2C2A] text-[#F9F9F7] text-center">
+                        <div className="max-w-3xl mx-auto">
+                            <div className="w-px h-16 bg-stone-600 mx-auto mb-12"></div>
+                            <h2 className="text-3xl md:text-5xl font-serif leading-snug mb-12 opacity-90">
+                                "True luxury is not about what you add,<br/>but what you refuse to take away."
+                            </h2>
+                            <p className="text-stone-400 text-sm uppercase tracking-widest">Minimalist Aesthetics</p>
+                        </div>
+                    </section>
+
+                    {/* Grid/Stories Section */}
+                    <section id="stories" className="grid grid-cols-1 md:grid-cols-2 bg-[#F9F9F7]">
+                        <div className="aspect-square md:aspect-auto bg-stone-200 relative overflow-hidden group">
+                            <img 
+                                src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1974&auto=format&fit=crop" 
+                                alt="Texture" 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <span className="cursor-pointer text-white border border-white px-6 py-3 uppercase text-xs tracking-widest hover:bg-white hover:text-stone-900 transition-all">Read Journal</span>
+                            </div>
+                        </div>
+                        <div className="p-16 md:p-24 flex flex-col justify-center">
+                            <span className="text-stone-500 text-xs uppercase tracking-widest mb-4">From the Journal</span>
+                            <h3 className="text-3xl font-serif text-stone-900 mb-6">The Art of Slow Living</h3>
+                            <p className="text-stone-600 leading-loose mb-8 font-light">
+                                빠르게 흘러가는 현대 사회에서, 우리는 '느림'의 미학을 재조명합니다. 
+                                아침 햇살이 드는 창가, 손끝에 닿는 린넨의 감촉, 따뜻한 차 한 잔. 
+                                일상의 작은 순간들이 모여 삶의 풍요로움을 만듭니다.
+                            </p>
+                            <a href="#" className="inline-block text-stone-900 border-b border-stone-900 pb-1 text-xs tracking-widest uppercase w-max hover:text-stone-500 hover:border-stone-500 transition-colors">
+                                Read Full Story
+                            </a>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer id="contact" className="bg-[#F9F9F7] pt-24 pb-12 px-6 border-t border-stone-200">
+                        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
+                            <div className="col-span-1 md:col-span-2">
+                                <a href="#" className="text-2xl font-serif tracking-widest font-bold text-stone-900 block mb-8">
+                                    L'ESSENCE
+                                </a>
+                                <p className="text-stone-500 font-light max-w-xs leading-relaxed">
+                                    We curate timeless pieces for modern living. 
+                                    Based in Seoul, inspired by nature.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-stone-900 mb-6">Navigate</h4>
+                                <ul className="space-y-4 text-sm text-stone-500 font-light">
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Home</a></li>
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Collection</a></li>
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Philosophy</a></li>
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Journal</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-stone-900 mb-6">Connect</h4>
+                                <ul className="space-y-4 text-sm text-stone-500 font-light">
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Instagram</a></li>
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Pinterest</a></li>
+                                    <li><a href="#" className="hover:text-stone-900 transition-colors">Newsletter</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-stone-200">
+                            <p className="text-stone-400 text-xs">© 2024 L'Essence. All rights reserved.</p>
+                            <div className="flex space-x-6 mt-4 md:mt-0">
+                                <a href="#" className="text-stone-400 text-xs hover:text-stone-900 transition-colors">Privacy Policy</a>
+                                <a href="#" className="text-stone-400 text-xs hover:text-stone-900 transition-colors">Terms of Use</a>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
-                <span className="text-xs tracking-wider uppercase text-stone-500">Organic</span>
-              </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
-                  <Wind strokeWidth={1.5} size={20} />
-                </div>
-                <span className="text-xs tracking-wider uppercase text-stone-500">Timeless</span>
-              </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center mb-3 text-stone-600">
-                  <Droplets strokeWidth={1.5} size={20} />
-                </div>
-                <span className="text-xs tracking-wider uppercase text-stone-500">Pure</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            );
+        };
 
-      {/* Featured Collection */}
-      <section id="collection" className="py-24 bg-stone-100 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <span className="text-stone-500 text-xs uppercase tracking-widest block mb-2">Selected Works</span>
-              <h2 className="text-3xl md:text-4xl font-serif text-stone-900">Curated Collection</h2>
-            </div>
-            <a href="#" className="hidden md:flex items-center text-xs uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors group">
-              View All <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Item 1 */}
-            <div className="group cursor-pointer">
-              <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
-                <img 
-                  src="https://i.imgur.com/QLCC151.png" 
-                  alt="Ceramic Vase" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <h3 className="text-xl font-serif text-stone-900 mb-1">Ceramic Vase No.05</h3>
-              <p className="text-stone-500 text-sm">Handcrafted Clay</p>
-            </div>
-
-            {/* Item 2 */}
-            <div className="group cursor-pointer md:-mt-12">
-              <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1965&auto=format&fit=crop" 
-                  alt="Linen Chair" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <h3 className="text-xl font-serif text-stone-900 mb-1">Lounge Chair</h3>
-              <p className="text-stone-500 text-sm">Natural Linen & Oak</p>
-            </div>
-
-            {/* Item 3 */}
-            <div className="group cursor-pointer">
-              <div className="aspect-[3/4] bg-stone-200 overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?q=80&w=2071&auto=format&fit=crop" 
-                  alt="Table Lamp" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <h3 className="text-xl font-serif text-stone-900 mb-1">Plush Bed</h3>
-              <p className="text-stone-500 text-sm">Natural Fiber & Birch Wood </p>
-            </div>
-          </div>
-          
-          <div className="mt-12 flex justify-center md:hidden">
-            <a href="#" className="flex items-center text-xs uppercase tracking-widest text-stone-600 hover:text-stone-900 transition-colors">
-              View All <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Text/Quote Section */}
-      <section className="py-32 px-6 bg-[#2C2C2A] text-[#F9F9F7] text-center">
-        <div className="max-w-3xl mx-auto">
-          <div className="w-px h-16 bg-stone-600 mx-auto mb-12"></div>
-          <h2 className="text-3xl md:text-5xl font-serif leading-snug mb-12 opacity-90">
-            "True luxury is not about what you add,<br/>but what you refuse to take away."
-          </h2>
-          <p className="text-stone-400 text-sm uppercase tracking-widest">Minimalist Aesthetics</p>
-        </div>
-      </section>
-
-      {/* Grid/Stories Section */}
-      <section id="stories" className="grid grid-cols-1 md:grid-cols-2 bg-[#F9F9F7]">
-        <div className="aspect-square md:aspect-auto bg-stone-200 relative overflow-hidden group">
-          <img 
-            src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1974&auto=format&fit=crop" 
-            alt="Texture" 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-             <span className="text-white border border-white px-6 py-3 uppercase text-xs tracking-widest hover:bg-white hover:text-stone-900 transition-all">Read Journal</span>
-          </div>
-        </div>
-        <div className="p-16 md:p-24 flex flex-col justify-center">
-          <span className="text-stone-500 text-xs uppercase tracking-widest mb-4">From the Journal</span>
-          <h3 className="text-3xl font-serif text-stone-900 mb-6">The Art of Slow Living</h3>
-          <p className="text-stone-600 leading-loose mb-8 font-light">
-            빠르게 흘러가는 현대 사회에서, 우리는 '느림'의 미학을 재조명합니다. 
-            아침 햇살이 드는 창가, 손끝에 닿는 린넨의 감촉, 따뜻한 차 한 잔. 
-            일상의 작은 순간들이 모여 삶의 풍요로움을 만듭니다.
-          </p>
-          <a href="#" className="inline-block text-stone-900 border-b border-stone-900 pb-1 text-xs tracking-widest uppercase w-max hover:text-stone-500 hover:border-stone-500 transition-colors">
-            Read Full Story
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer id="contact" className="bg-[#F9F9F7] pt-24 pb-12 px-6 border-t border-stone-200">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
-          <div className="col-span-1 md:col-span-2">
-            <a href="#" className="text-2xl font-serif tracking-widest font-bold text-stone-900 block mb-8">
-              L'ESSENCE
-            </a>
-            <p className="text-stone-500 font-light max-w-xs leading-relaxed">
-              We curate timeless pieces for modern living. 
-              Based in Seoul, inspired by nature.
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-stone-900 mb-6">Navigate</h4>
-            <ul className="space-y-4 text-sm text-stone-500 font-light">
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Home</a></li>
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Collection</a></li>
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Philosophy</a></li>
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Journal</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-stone-900 mb-6">Connect</h4>
-            <ul className="space-y-4 text-sm text-stone-500 font-light">
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Instagram</a></li>
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Pinterest</a></li>
-              <li><a href="#" className="hover:text-stone-900 transition-colors">Newsletter</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-stone-200">
-          <p className="text-stone-400 text-xs">© 2024 L'Essence. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-stone-400 text-xs hover:text-stone-900 transition-colors">Privacy Policy</a>
-            <a href="#" className="text-stone-400 text-xs hover:text-stone-900 transition-colors">Terms of Use</a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
