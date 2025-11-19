@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essence - Minimalist Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 설정 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f9f9f7; /* 아주 연한 웜 그레이 (종이 질감 느낌) */
+            color: #2d2d2d;
+            overflow-x: hidden;
+        }
+        
+        /* 포인트 폰트 (영문 제목용) */
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* 텍스트 드래그 색상 (숨겨진 디테일) */
+        ::selection {
+            background: #d4d4d0; 
+            color: #000;
+        }
+
+        /* 스크롤바 숨기기 (깔끔함을 위해) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        /* 이미지 호버 효과 */
+        .img-container {
+            overflow: hidden;
+        }
+        .img-container img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-container:hover img {
+            transform: scale(1.03); /* 아주 살짝만 확대 */
+        }
+
+        /* 스크롤 애니메이션 클래스 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 부드러운 밑줄 효과 */
+        .hover-underline {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.4s ease-out;
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 네비게이션 -->
+    <nav class="fixed w-full top-0 z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center mix-blend-difference text-stone-800 transition-all duration-300" id="navbar">
+        <a href="#" class="serif text-2xl italic font-semibold tracking-tighter hover:opacity-70 transition-opacity">Essence.</a>
+        
+        <div class="hidden md:flex space-x-12 text-sm font-light tracking-widest uppercase">
+            <a href="#work" class="hover-underline">Work</a>
+            <a href="#about" class="hover-underline">About</a>
+            <a href="#journal" class="hover-underline">Journal</a>
+        </div>
+
+        <button class="md:hidden focus:outline-none group">
+            <div class="w-6 h-0.5 bg-current mb-1.5 transition-all group-hover:w-4 ml-auto"></div>
+            <div class="w-6 h-0.5 bg-current transition-all"></div>
+        </button>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <header class="relative h-screen w-full flex flex-col justify-center px-6 md:px-12 pt-20">
+        <div class="reveal max-w-4xl z-10">
+            <p class="text-stone-500 text-sm md:text-base tracking-[0.2em] mb-6 uppercase">Less is More</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-8">
+                본질에 집중하는<br>
+                <span class="serif italic font-normal ml-2 text-stone-600">Natural</span> 디자인.
+            </h1>
+            <p class="max-w-md text-stone-600 leading-relaxed font-light">
+                화려함보다는 편안함을, 복잡함보다는 단순함을 추구합니다. 
+                당신의 일상에 스며드는 고요한 가치를 만듭니다.
+            </p>
+        </div>
+
+        <!-- 장식용 배경 이미지 (오른쪽 하단) -->
+        <div class="absolute right-0 bottom-0 w-2/3 h-2/3 md:w-1/2 md:h-3/4 bg-stone-200 -z-10 overflow-hidden reveal" style="transition-delay: 0.2s;">
+            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Minimal Interior" 
+                 class="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out">
+        </div>
+    </header>
+
+    <!-- 여백 -->
+    <div class="h-24 md:h-40"></div>
+
+    <!-- 작품 갤러리 (Masonry 느낌) -->
+    <section id="work" class="px-6 md:px-12">
+        <div class="flex justify-between items-end mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl serif italic">Selected Works</h2>
+            <span class="text-xs tracking-widest text-stone-400 hidden md:block">2023 — 2024</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 lg:gap-y-24">
+            <!-- Item 1 -->
+            <div class="group cursor-pointer reveal">
+                <div class="img-container aspect-[4/5] bg-stone-200 mb-4 relative">
+                    <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Architecture">
+                </div>
+                <div class="flex justify-between items-baseline border-b border-stone-300 pb-2 group-hover:border-stone-800 transition-colors duration-300">
+                    <h3 class="text-lg font-light">Silent Concrete</h3>
+                    <span class="text-xs text-stone-400">Architecture</span>
+                </div>
+            </div>
+
+            <!-- Item 2 (약간 내려간 레이아웃) -->
+            <div class="group cursor-pointer reveal md:mt-16">
+                <div class="img-container aspect-[4/5] bg-stone-200 mb-4">
+                    <img src="https://images.unsplash.com/photo-1504198266287-1659872e6590?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Object">
+                </div>
+                <div class="flex justify-between items-baseline border-b border-stone-300 pb-2 group-hover:border-stone-800 transition-colors duration-300">
+                    <h3 class="text-lg font-light">Morning Haze</h3>
+                    <span class="text-xs text-stone-400">Photography</span>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="group cursor-pointer reveal">
+                <div class="img-container aspect-[4/5] bg-stone-200 mb-4">
+                    <img src="https://images.unsplash.com/photo-1531956531700-dc0ee0f1f9a5?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Interior">
+                </div>
+                <div class="flex justify-between items-baseline border-b border-stone-300 pb-2 group-hover:border-stone-800 transition-colors duration-300">
+                    <h3 class="text-lg font-light">Warm Wood</h3>
+                    <span class="text-xs text-stone-400">Interior</span>
+                </div>
+            </div>
+             <!-- Item 4 -->
+             <div class="group cursor-pointer reveal">
+                <div class="img-container aspect-square bg-stone-200 mb-4">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=2127&auto=format&fit=crop" class="w-full h-full object-cover" alt="Furniture">
+                </div>
+                <div class="flex justify-between items-baseline border-b border-stone-300 pb-2 group-hover:border-stone-800 transition-colors duration-300">
+                    <h3 class="text-lg font-light">Chair No.04</h3>
+                    <span class="text-xs text-stone-400">Furniture</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 텍스트 섹션 (About) -->
+    <section id="about" class="py-40 px-6 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between bg-[#f4f4f2]">
+        <div class="md:w-1/3 mb-10 md:mb-0 reveal">
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-stone-400 mb-4">Philosophy</h2>
+            <p class="serif text-4xl md:text-5xl leading-tight italic text-stone-800">
+                "Simplicity is the ultimate sophistication."
+            </p>
+        </div>
+        <div class="md:w-1/2 reveal">
+            <p class="text-stone-600 font-light leading-8 mb-6">
+                우리는 때때로 너무 많은 것으로 공간을 채우려 합니다. 하지만 진정한 아름다움은 덜어냄에서 시작됩니다. 
+                꾸미지 않은 듯한 자연스러운 질감, 눈을 편안하게 하는 톤온톤 컬러 매치, 그리고 기능에 충실한 형태.
+            </p>
+            <p class="text-stone-600 font-light leading-8">
+                이 공간은 당신이 잠시 멈추어 호흡할 수 있는 여백을 제공합니다. 
+                화려한 장식 없이도 충분히 빛나는 당신의 일상을 상상해보세요.
+            </p>
+            <div class="mt-8">
+                <a href="#" class="text-sm border-b border-stone-800 pb-1 hover:text-stone-500 hover:border-stone-500 transition-colors">Read Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 md:px-12 py-20 border-t border-stone-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+            <div class="reveal">
+                <h2 class="serif text-3xl mb-6 italic">Let's create together.</h2>
+                <a href="mailto:hello@essence.com" class="text-xl font-light hover:text-stone-500 transition-colors">hello@essence.com</a>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 text-sm font-light text-stone-500 reveal">
+                <div class="flex flex-col gap-2">
+                    <span class="text-stone-900 font-medium mb-2">Social</span>
+                    <a href="#" class="hover-underline">Instagram</a>
+                    <a href="#" class="hover-underline">Pinterest</a>
+                    <a href="#" class="hover-underline">Behance</a>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-stone-900 font-medium mb-2">Office</span>
+                    <p>Seoul, South Korea</p>
+                    <p>Gangnam-gu, Nonhyeon-ro</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 flex justify-between items-end text-xs text-stone-400 reveal">
+            <p>© 2024 Essence Studio. All rights reserved.</p>
+            <p>Designed with Silence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer를 이용한 스크롤 애니메이션
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1, // 요소가 10% 보일 때 작동
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            reveals.forEach((reveal) => {
+                revealOnScroll.observe(reveal);
+            });
+
+            // 네비게이션 바 스크롤 효과 (배경색 변경)
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-[#f9f9f7]/90', 'backdrop-blur-sm', 'py-4', 'md:py-4');
+                    navbar.classList.remove('py-6', 'md:py-8');
+                } else {
+                    navbar.classList.remove('bg-[#f9f9f7]/90', 'backdrop-blur-sm', 'py-4', 'md:py-4');
+                    navbar.classList.add('py-6', 'md:py-8');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
