@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Vibe - Free & Organized</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FDFBF7; /* 크림색 배경 */
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* 유기적인 형태의 Blob 애니메이션 */
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #FFD1D1; animation-delay: 0s; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { bottom: 20%; right: -10%; width: 400px; height: 400px; background: #C4D9FF; animation-delay: 2s; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        .blob-3 { top: 40%; left: 20%; width: 300px; height: 300px; background: #D4E2D4; animation-delay: 4s; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+
+        /* 텍스트 마키 효과 */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Bento Grid 스타일 */
+        .bento-item {
+            transition: all 0.3s ease;
+        }
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+
+        /* 그레인 텍스처 (종이 질감) */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- 배경 노이즈 및 Blobs -->
+    <div class="noise"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- 네비게이션 -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 glassmorphism py-4 px-6 md:px-12 flex justify-between items-center bg-white/30 backdrop-blur-md border-b border-white/20">
+        <div class="text-2xl font-black tracking-tighter flex items-center gap-2">
+            <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+            STUDIO VIBE
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm font-bold tracking-wide text-slate-600">
+            <a href="#work" class="hover:text-black transition-colors">WORK</a>
+            <a href="#about" class="hover:text-black transition-colors">ABOUT</a>
+            <a href="#service" class="hover:text-black transition-colors">SERVICE</a>
+            <a href="#contact" class="hover:text-black transition-colors">CONTACT</a>
+        </div>
+        <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+            <i data-lucide="menu"></i>
+        </button>
+    </nav>
+
+    <!-- 모바일 메뉴 -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#FDFBF7] z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8 text-2xl font-bold">
+        <button class="absolute top-6 right-6" onclick="toggleMobileMenu()">
+            <i data-lucide="x" size="32"></i>
+        </button>
+        <a href="#work" onclick="toggleMobileMenu()">WORK</a>
+        <a href="#about" onclick="toggleMobileMenu()">ABOUT</a>
+        <a href="#service" onclick="toggleMobileMenu()">SERVICE</a>
+        <a href="#contact" onclick="toggleMobileMenu()">CONTACT</a>
+    </div>
+
+    <!-- 히어로 섹션 -->
+    <section class="relative pt-40 pb-20 px-6 md:px-12 min-h-screen flex flex-col justify-center items-start">
+        <div class="max-w-6xl w-full mx-auto">
+            <p class="text-orange-500 font-bold mb-4 tracking-widest uppercase animate-fade-in-up">Creative Digital Agency</p>
+            <h1 class="text-5xl md:text-8xl font-black leading-tight mb-8 text-slate-900">
+                자유로운 상상,<br>
+                <span class="italic font-light text-slate-500">정돈된</span> 결과물.
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mb-12">
+                우리는 틀에 얽매이지 않는 아이디어를 논리적인 구조로 설계합니다. 
+                무질서 속에서 패턴을 찾고, 그 안에서 새로운 가치를 만들어냅니다.
+            </p>
+            <div class="flex gap-4">
+                <button class="bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-700 transition-all hover:scale-105 shadow-lg">
+                    프로젝트 시작하기
+                </button>
+                <button class="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full font-bold hover:bg-slate-50 transition-all hover:scale-105 shadow-sm flex items-center gap-2">
+                    포트폴리오 <i data-lucide="arrow-right" size="18"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 장식 요소 -->
+        <div class="absolute right-10 bottom-20 hidden md:block animate-bounce duration-[3000ms]">
+            <i data-lucide="arrow-down" size="48" class="text-slate-400"></i>
+        </div>
+    </section>
+
+    <!-- 마키 텍스트 (움직이는 띠) -->
+    <section class="py-12 bg-slate-900 text-white overflow-hidden -rotate-1 transform origin-left scale-105 border-y-4 border-orange-400">
+        <div class="marquee-container text-4xl md:text-6xl font-black italic opacity-90">
+            <div class="marquee-content">
+                BRANDING • WEB DESIGN • UX/UI • DEVELOPMENT • STRATEGY • CREATIVE DIRECTION • BRANDING • WEB DESIGN • UX/UI • DEVELOPMENT • STRATEGY • CREATIVE DIRECTION •
+            </div>
+        </div>
+    </section>
+
+    <!-- 포트폴리오 그리드 (Bento Grid) -->
+    <section id="work" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-16 border-b border-slate-300 pb-8">
+            <div>
+                <h2 class="text-4xl font-black mb-2">Selected Works</h2>
+                <p class="text-slate-500">최근 진행한 프로젝트들입니다.</p>
+            </div>
+            <a href="#" class="hidden md:flex items-center gap-2 font-bold hover:gap-4 transition-all">모두 보기 <i data-lucide="arrow-right"></i></a>
+        </div>
+
+        <!-- 비대칭 그리드 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+            <!-- Item 1: Large -->
+            <div class="bento-item md:col-span-2 rounded-3xl overflow-hidden relative group bg-[#E2E8F0]">
+                <div class="absolute inset-0 bg-slate-200 flex items-center justify-center text-slate-300 text-9xl font-black group-hover:scale-110 transition-transform duration-500">01</div>
+                <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/60 to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-2xl font-bold">Mono Architecture</h3>
+                    <p>Web Design & Branding</p>
+                </div>
+            </div>
+
+            <!-- Item 2: Standard -->
+            <div class="bento-item rounded-3xl overflow-hidden relative group bg-[#FFD1D1]">
+                <div class="absolute inset-0 bg-orange-100 flex items-center justify-center text-orange-200 text-8xl font-black group-hover:rotate-12 transition-transform duration-500">02</div>
+                <div class="absolute top-6 right-6 bg-white rounded-full p-3 shadow-sm">
+                    <i data-lucide="arrow-up-right" class="text-black"></i>
+                </div>
+                 <div class="absolute bottom-6 left-6">
+                    <h3 class="text-xl font-bold text-slate-800">Peach Fuzz</h3>
+                    <p class="text-sm text-slate-600">Package Design</p>
+                </div>
+            </div>
+
+             <!-- Item 3: Tall -->
+             <div class="bento-item md:row-span-2 rounded-3xl overflow-hidden relative group bg-[#C4D9FF]">
+                <div class="absolute inset-0 bg-blue-100 flex items-center justify-center text-blue-200 text-9xl font-black group-hover:scale-105 transition-transform duration-500">03</div>
+                <div class="absolute inset-0 flex flex-col justify-between p-8">
+                    <div class="bg-white/80 backdrop-blur w-fit px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">App Dev</div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-slate-800 mb-2">FinTech<br>Solution</h3>
+                        <p class="text-slate-600">UI/UX Strategy for banking app renovation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Standard -->
+            <div class="bento-item rounded-3xl overflow-hidden relative group bg-[#D4E2D4]">
+                <div class="absolute inset-0 bg-green-100 flex items-center justify-center text-green-200 text-8xl font-black group-hover:-rotate-6 transition-transform duration-500">04</div>
+                 <div class="absolute bottom-6 left-6">
+                    <h3 class="text-xl font-bold text-slate-800">Eco Life</h3>
+                    <p class="text-sm text-slate-600">Campaign</p>
+                </div>
+            </div>
+
+            <!-- Item 5: Standard -->
+            <div class="bento-item rounded-3xl overflow-hidden relative group bg-slate-800 text-white">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                    <i data-lucide="play-circle" size="48" class="mb-4 hover:text-orange-400 transition-colors cursor-pointer"></i>
+                    <h3 class="text-xl font-bold">Showreel 2024</h3>
+                    <p class="text-sm text-slate-400 mt-2">우리의 여정을 확인하세요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section id="service" class="py-20 bg-white/50 backdrop-blur-sm border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="space-y-4 hover:-translate-y-2 transition-transform duration-300 p-6 rounded-2xl hover:bg-white hover:shadow-xl border border-transparent hover:border-slate-100">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-500 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="pen-tool"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">Design</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        단순한 심미성을 넘어 브랜드의 철학을 담아냅니다. 로고, 아이덴티티, 웹 디자인까지 일관된 톤앤매너를 구축합니다.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2 mt-4">
+                        <li>• Brand Identity</li>
+                        <li>• UI/UX Design</li>
+                        <li>• Graphic Design</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 hover:-translate-y-2 transition-transform duration-300 p-6 rounded-2xl hover:bg-white hover:shadow-xl border border-transparent hover:border-slate-100">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="code-2"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">Development</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        유연하고 확장 가능한 코드로 아이디어를 구현합니다. 웹 표준을 준수하며, 퍼포먼스와 SEO에 최적화된 결과물을 만듭니다.
+                    </p>
+                     <ul class="text-sm text-slate-500 space-y-2 mt-4">
+                        <li>• Frontend Development</li>
+                        <li>• CMS Integration</li>
+                        <li>• Interactive Web</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 hover:-translate-y-2 transition-transform duration-300 p-6 rounded-2xl hover:bg-white hover:shadow-xl border border-transparent hover:border-slate-100">
+                    <div class="w-12 h-12 bg-green-100 text-green-500 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="message-circle"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">Marketing</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        데이터 기반의 전략과 감성적인 콘텐츠로 타겟 오디언스의 마음을 움직입니다. 명확한 목표 설정과 성과 분석을 제공합니다.
+                    </p>
+                     <ul class="text-sm text-slate-500 space-y-2 mt-4">
+                        <li>• Contents Strategy</li>
+                        <li>• Social Media</li>
+                        <li>• Performance Ads</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 소개 및 철학 -->
+    <section id="about" class="py-32 px-6 md:px-12 max-w-5xl mx-auto text-center">
+        <span class="text-sm font-bold text-slate-400 tracking-widest uppercase mb-4 block">Our Philosophy</span>
+        <h2 class="text-3xl md:text-5xl font-black leading-snug mb-12">
+            "우리는 <span class="bg-orange-200 px-2 italic transform -skew-x-6 inline-block">재미</span>를 추구하지만,<br>
+            <span class="bg-blue-200 px-2 italic transform skew-x-6 inline-block">약속</span>은 철저히 지킵니다."
+        </h2>
+        <div class="flex flex-col md:flex-row justify-center gap-8 text-left">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex-1">
+                <h4 class="font-bold text-xl mb-4 flex items-center gap-2">
+                    <i data-lucide="zap" class="text-yellow-500"></i> Spontaneity
+                </h4>
+                <p class="text-slate-600">
+                    아이디어 회의는 언제나 시끌벅적합니다. 엉뚱한 생각이 혁신의 씨앗이 된다고 믿기 때문입니다. 우리는 고정관념을 싫어합니다.
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex-1">
+                <h4 class="font-bold text-xl mb-4 flex items-center gap-2">
+                    <i data-lucide="box" class="text-blue-500"></i> Structure
+                </h4>
+                <p class="text-slate-600">
+                    하지만 실행 단계에서는 픽셀 하나도 놓치지 않습니다. 일정과 퀄리티 관리는 엔지니어링처럼 정교하게 이루어집니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / 푸터 -->
+    <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 rounded-t-[3rem]">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
+                <div class="max-w-xl">
+                    <h2 class="text-5xl md:text-7xl font-black mb-8 leading-none">Let's work<br>together.</h2>
+                    <p class="text-slate-400 text-lg mb-8">당신의 프로젝트에 우리의 바이브를 더해보세요.<br>커피 한 잔 하면서 이야기 나눌까요?</p>
+                    <a href="mailto:hello@studiovibe.com" class="inline-flex items-center gap-3 text-2xl font-bold border-b-2 border-orange-400 hover:text-orange-400 transition-colors pb-1">
+                        hello@studiovibe.com <i data-lucide="arrow-up-right"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-12 text-slate-400">
+                    <div>
+                        <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Socials</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Behance</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Office</h4>
+                        <p>Seoul, South Korea<br>Gangnam-gu, Teheran-ro</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+                <p>&copy; 2024 Studio Vibe. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 아이콘 초기화
+        lucide.createIcons();
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-x-full');
+        }
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 스크롤 시 네비게이션 바 스타일 변경 (유리 효과 강화)
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('bg-white/30', 'bg-white/80');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('bg-white/80', 'bg-white/30');
+            }
+        });
+    </script>
+</body>
+</html>
