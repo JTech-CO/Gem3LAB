@@ -13,5 +13,6 @@ https://jtech-co.github.io/Gem3LAB/(사이트 제목).html
 * **[Full_void](<https://jtech-co.github.io/Gem3LAB/Full_void.html>)**: 꽉 찼는데, 여백의 미가 느껴지는 웹사이트 
 * **[Studio_vibe](<https://jtech-co.github.io/Gem3LAB/Studio_vibe.html>)**: 자유분방한 느낌인데, 정돈된 느낌인 웹사이트
 * **[Lumen](<https://jtech-co.github.io/Gem3LAB/Lumen.html>)**: 임팩트 있는데, 은은한 스타일의 웹사이트
-* **[Essence](<https://jtech-co.github.io/Gem3LAB/Essence.html>)**: 꾸민 듯 안 꾸민 듯한 웹사이트
+* **[Essence](<https://jtech-co.github.io/Gem3LAB/Essence.html>)**: 꾸민 듯 안 꾸민 듯한 웹사이트 
+* **[LESSENCE](<https://jtech-co.github.io/Gem3LAB/LESSENCE.html>)**: 내추럴한데 고급스러운 웹사이트
 * 
