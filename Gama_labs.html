@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMA LABS - The Impossible Paradox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js 버전을 r128에서 0.160.0으로 업데이트했습니다 (CapsuleGeometry 지원) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    
+    <!-- Fonts: Noto Serif KR (Trust), Gowun Dodum (Jeong), JetBrains Mono (Startup) -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=JetBrains+Mono:wght@400;800&family=Noto+Sans+KR:wght@300;400;700&family=Noto+Serif+KR:wght@300;600;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-trust: #0F172A; /* Slate 900 - 공기업의 묵직함 */
+            --color-wit: #D4FF00;   /* Neon Lime - 스타트업의 톡톡 튐 */
+            --color-jeong: #FF6B6B; /* Warm Coral - 한국적 정 */
+        }
+        
+        body {
+            background-color: var(--color-trust);
+            color: #ffffff;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-trust { font-family: 'Noto Serif KR', serif; }
+        .font-wit { font-family: 'JetBrains Mono', monospace; }
+        .font-jeong { font-family: 'Gowun Dodum', sans-serif; }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 20px;
+            height: 20px;
+            background-color: var(--color-wit);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transition: transform 0.1s;
+        }
+
+        /* Typography Mix */
+        .paradox-title {
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-trust); }
+        ::-webkit-scrollbar-thumb { background: var(--color-wit); border-radius: 4px; }
+
+        /* 3D Container */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <div class="cursor-dot" id="cursor"></div>
+    <div class="grain-overlay"></div>
+    <div id="canvas-container"></div>
+
+    <!-- Navigation: 공기업 스타일의 딱딱함과 스타트업의 미니멀리즘 -->
+    <nav class="fixed w-full z-50 flex justify-between items-center px-8 py-6 mix-blend-difference text-white">
+        <div class="flex items-end gap-2">
+            <h1 class="font-trust text-2xl font-black tracking-tighter">GAMA LABS</h1>
+            <span class="font-jeong text-sm mb-1 opacity-70">가마 랩스 | since 1974</span>
+        </div>
+        <div class="hidden md:flex gap-8 font-wit text-sm">
+            <a href="#" class="hover:text-[#D4FF00] transition-colors">[TRUST]</a>
+            <a href="#" class="hover:text-[#D4FF00] transition-colors">[WIT]</a>
+            <a href="#" class="hover:text-[#D4FF00] transition-colors">[JEONG]</a>
+            <a href="#" class="hover:text-[#D4FF00] transition-colors">[CONTACT]</a>
+        </div>
+        <button class="md:hidden text-[#D4FF00] font-black">MENU</button>
+    </nav>
+
+    <!-- Hero Section: 파격적 심볼 vs 직관성 -->
+    <header class="relative h-screen flex flex-col justify-center items-center text-center px-4">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl z-10 pointer-events-none">
+            <h2 class="paradox-title font-trust text-5xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 mb-4">
+                DIGITAL<br>RICE
+            </h2>
+            <p class="font-jeong text-xl md:text-3xl text-[#D4FF00] mt-8">
+                "할머니, 저희 그냥 쌀 팔아요."
+            </p>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 flex flex-col items-center gap-2 animate-bounce">
+            <span class="font-wit text-xs tracking-widest">SCROLL TO EXPERIENCE THE PARADOX</span>
+            <div class="w-px h-12 bg-[#D4FF00]"></div>
+        </div>
+    </header>
+
+    <!-- Section 1: 묵직한 신뢰 vs 톡톡 튀는 위트 -->
+    <section class="min-h-screen flex flex-col md:flex-row relative bg-[#0F172A] z-20">
+        <div class="w-full md:w-1/2 border-r border-gray-800 p-12 flex flex-col justify-center" data-aos="fade-right">
+            <span class="font-trust text-gray-500 mb-4 block text-lg">Since 1974</span>
+            <h3 class="font-trust text-4xl md:text-6xl mb-8 leading-tight">
+                결재 서류는<br>
+                <span class="italic">두껍게.</span>
+            </h3>
+            <p class="font-trust text-gray-400 text-lg leading-relaxed max-w-md">
+                가마랩스는 지난 50년간 대한민국 주식(主食)의 안정을 위해 헌신해왔습니다. 
+                우리의 보고서는 국회 도서관에 보관될 만큼 묵직하며, 
+                우리의 경영 철학은 화강암처럼 단단합니다.
+            </p>
+            <div class="mt-12 border border-white w-32 h-32 flex items-center justify-center rounded-full hover:bg-white hover:text-black transition-all duration-500 cursor-pointer">
+                <span class="font-trust">공문서 보기</span>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-12 flex flex-col justify-center bg-[#1a233a]" data-aos="fade-left">
+            <span class="font-wit text-[#D4FF00] mb-4 block text-lg">> npm run wit</span>
+            <h3 class="font-wit text-4xl md:text-6xl mb-8 leading-tight text-[#D4FF00]">
+                퇴근은<br>
+                <span class="italic">칼같이.</span>
+            </h3>
+            <p class="font-jeong text-gray-300 text-lg leading-relaxed max-w-md">
+                하지만 우리 대표님 MBTI는 ENFP입니다. 
+                회의는 15분 컷, 복장은 자율, 회식은 점심에 오마카세.
+                세상은 바뀌었고, 쌀가마니는 이제 클라우드 서버에 저장됩니다.
+                (참고: 탕비실에 쌀과자 무제한)
+            </p>
+            <div class="mt-12 bg-[#D4FF00] text-black w-auto inline-flex px-8 py-4 font-wit font-bold transform hover:-rotate-3 hover:scale-110 transition-all cursor-pointer shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+                GET_FRESH_RICE();
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: 글로벌 감각 vs 한국적 정 (Marquee) -->
+    <section class="py-20 bg-[#D4FF00] text-[#0F172A] overflow-hidden z-20 relative">
+        <div class="marquee-container transform -rotate-2 scale-110">
+            <div class="marquee-content font-wit text-6xl md:text-8xl font-black py-4">
+                AI DRIVEN AGRICULTURE <span class="font-trust italic font-light mx-4">밥은 먹고 다니냐?</span> HYPER LOCAL FOOD TECH <span class="font-trust italic font-light mx-4">자고로 한국인은 밥심</span> GLOBAL SUPPLY CHAIN <span class="font-trust italic font-light mx-4">뜨끈한 숭늉 한 사발</span> 
+                AI DRIVEN AGRICULTURE <span class="font-trust italic font-light mx-4">밥은 먹고 다니냐?</span> HYPER LOCAL FOOD TECH <span class="font-trust italic font-light mx-4">자고로 한국인은 밥심</span> GLOBAL SUPPLY CHAIN <span class="font-trust italic font-light mx-4">뜨끈한 숭늉 한 사발</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: 여백 vs 50년 역사 -->
+    <section class="min-h-[300vh] relative z-20 bg-[#0F172A]" id="history-section">
+        <div class="sticky top-0 h-screen flex items-center overflow-hidden">
+            <!-- Background Year Number (Changes on scroll) -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20vw] font-trust font-black text-[#1e293b] leading-none select-none" id="bg-year">
+                1974
+            </div>
+
+            <div class="container mx-auto px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-4">
+                        <h2 class="font-trust text-5xl mb-4 text-white">50년의<br>압축</h2>
+                        <div class="w-20 h-1 bg-[#D4FF00] mb-8"></div>
+                        <p class="font-jeong text-gray-400">
+                            로고 안에는 50년이 담겨있지만,<br>
+                            화면은 시원하게 비웠습니다.<br>
+                            스크롤을 내려 우리의 시간을 확인하세요.
+                        </p>
+                    </div>
+                    
+                    <!-- Dynamic Content Area -->
+                    <div class="md:col-span-8 h-[60vh] flex items-center justify-center relative">
+                        <div class="history-card absolute opacity-0 transform translate-y-10 transition-all duration-500" id="card-1974">
+                            <img src="/api/placeholder/600/400" alt="1974년 개업식" class="w-full h-64 object-cover grayscale hover:grayscale-0 transition-all mb-4 border border-gray-700">
+                            <h4 class="font-wit text-[#D4FF00] text-xl">1974.10.24</h4>
+                            <h3 class="font-trust text-3xl text-white mt-2">가마상회 개업</h3>
+                            <p class="font-jeong text-gray-400 mt-2">할머니가 처음 솥뚜껑을 여신 날. "쌀이 좋아야 밥이 달다"</p>
+                        </div>
+
+                        <div class="history-card absolute opacity-0 transform translate-y-10 transition-all duration-500" id="card-1998">
+                            <div class="w-full h-64 bg-[#D4FF00] flex items-center justify-center mb-4">
+                                <span class="font-wit text-black text-4xl font-bold">IMF SURVIVOR</span>
+                            </div>
+                            <h4 class="font-wit text-[#D4FF00] text-xl">1998.02.11</h4>
+                            <h3 class="font-trust text-3xl text-white mt-2">무료 급식소 운영</h3>
+                            <p class="font-jeong text-gray-400 mt-2">어려울수록 나눠야 한다며 창고를 개방했습니다. 이것이 K-정서.</p>
+                        </div>
+
+                        <div class="history-card absolute opacity-0 transform translate-y-10 transition-all duration-500" id="card-2024">
+                            <div class="w-full h-64 border border-[#D4FF00] flex items-center justify-center mb-4 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#D4FF00] to-transparent opacity-20 w-1/2 animate-[marquee_2s_linear_infinite]"></div>
+                                <span class="font-wit text-white text-4xl font-bold">GAMA LABS</span>
+                            </div>
+                            <h4 class="font-wit text-[#D4FF00] text-xl">2024.01.01</h4>
+                            <h3 class="font-trust text-3xl text-white mt-2">사명 변경 및 AI 도입</h3>
+                            <p class="font-jeong text-gray-400 mt-2">이제 밥맛은 데이터가 결정합니다. 하지만 물 조절은 여전히 손맛입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: 할머니도 알아보는 심볼 (직관적 설명) -->
+    <section class="py-32 bg-white text-[#0F172A] z-20 relative">
+        <div class="container mx-auto px-8 text-center">
+            <h2 class="font-trust text-4xl md:text-6xl mb-16">그래서 뭐 하는 회사인가요?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="group text-center">
+                    <div class="w-40 h-40 mx-auto bg-[#0F172A] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <!-- Simple Icon: Rice Bowl -->
+                        <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 12a8 8 0 01-16 0M4 12h16M12 4v8M6 8h12" /></svg>
+                    </div>
+                    <h3 class="font-trust text-2xl font-bold mb-2">밥 팝니다</h3>
+                    <p class="font-jeong text-gray-600">최고급 품종 쌀을<br>당일 도정해서 보냅니다.</p>
+                </div>
+                <div class="group text-center">
+                    <div class="w-40 h-40 mx-auto bg-[#D4FF00] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <!-- Simple Icon: Truck -->
+                        <svg class="w-20 h-20 text-[#0F172A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
+                    </div>
+                    <h3 class="font-trust text-2xl font-bold mb-2">배달합니다</h3>
+                    <p class="font-jeong text-gray-600">무거운 쌀포대<br>현관 앞까지 놔드립니다.</p>
+                </div>
+                <div class="group text-center">
+                    <div class="w-40 h-40 mx-auto border-4 border-[#0F172A] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <!-- Simple Icon: Heart -->
+                        <svg class="w-20 h-20 text-[#FF6B6B]" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </div>
+                    <h3 class="font-trust text-2xl font-bold mb-2">사랑합니다</h3>
+                    <p class="font-jeong text-gray-600">고객님은 우리의<br>손자, 손녀입니다.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 p-6 bg-gray-100 inline-block rounded-lg transform rotate-1 border border-dashed border-gray-400">
+                <p class="font-jeong text-xl">"할머니, 이제 이해가 되셨쥬?"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: 세련됨 + 정 -->
+    <footer class="bg-[#0F172A] text-white py-20 border-t border-gray-800 z-20 relative">
+        <div class="container mx-auto px-8 flex flex-col md:flex-row justify-between items-end">
+            <div>
+                <h2 class="font-trust text-4xl font-bold mb-6">GAMA LABS</h2>
+                <address class="font-jeong text-gray-400 not-italic leading-loose">
+                    경기도 이천시 쌀밥대로 123번길<br>
+                    대표이사: 김덕배 (Grandma Kim)<br>
+                    사업자등록번호: 1974-10-24<br>
+                    <span class="text-[#D4FF00] font-wit">hello@gamalabs.kr</span>
+                </address>
+            </div>
+            <div class="mt-12 md:mt-0 text-right">
+                <p class="font-trust text-2xl mb-4">식사는 하셨습니까?</p>
+                <div class="flex gap-4 justify-end">
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-[#D4FF00] hover:border-[#D4FF00] hover:text-black transition-colors">Ins</a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-[#D4FF00] hover:border-[#D4FF00] hover:text-black transition-colors">Fb</a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-[#D4FF00] hover:border-[#D4FF00] hover:text-black transition-colors">Yt</a>
+                </div>
+                <p class="font-wit text-xs text-gray-600 mt-8">© 2024 GAMA LABS. All Rice Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Three.js Background (The "Unprecedented Symbol" - A glowing grain)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create specific shape: Looks like a grain of rice but wireframe/tech
+        const geometry = new THREE.CapsuleGeometry(1, 2.5, 4, 16); 
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0xD4FF00, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.3
+        });
+        const rice = new THREE.Mesh(geometry, material);
+        
+        // Add inner glow
+        const innerGeo = new THREE.CapsuleGeometry(0.8, 2.2, 4, 8);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, transparent: true, opacity: 0.1 });
+        const innerRice = new THREE.Mesh(innerGeo, innerMat);
+        rice.add(innerRice);
+
+        scene.add(rice);
+        camera.position.z = 5;
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            rice.rotation.x += 0.005;
+            rice.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Mouse interaction for 3D object
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 2 - 1;
+            const y = -(e.clientY / window.innerHeight) * 2 + 1;
+            
+            gsap.to(rice.rotation, {
+                x: y * 0.5,
+                y: x * 0.5 + (Date.now() * 0.001), // Constant spin + mouse influence
+                duration: 1
+            });
+
+            // Custom cursor movement
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. Scroll Animations (GSAP)
+        gsap.registerPlugin(ScrollTrigger);
+
+        // History Timeline Logic
+        const timelineSection = document.getElementById('history-section');
+        const yearDisplay = document.getElementById('bg-year');
+        const cards = ['card-1974', 'card-1998', 'card-2024'];
+        const years = ['1974', '1998', '2024'];
+
+        ScrollTrigger.create({
+            trigger: timelineSection,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            onUpdate: (self) => {
+                // Move the rice object based on scroll
+                rice.position.z = 5 - (self.progress * 2);
+                rice.rotation.z = self.progress * Math.PI;
+
+                // Determine which card to show based on progress
+                const progress = self.progress;
+                let activeIndex = -1;
+
+                if (progress < 0.33) activeIndex = 0;
+                else if (progress < 0.66) activeIndex = 1;
+                else activeIndex = 2;
+
+                // Update Background Year
+                yearDisplay.innerText = years[activeIndex];
+
+                // Show/Hide Cards
+                cards.forEach((id, index) => {
+                    const el = document.getElementById(id);
+                    if (index === activeIndex) {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                        el.style.zIndex = 10;
+                    } else {
+                        el.style.opacity = 0;
+                        el.style.transform = 'translateY(50px)';
+                        el.style.zIndex = 0;
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
