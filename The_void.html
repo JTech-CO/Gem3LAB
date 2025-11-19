@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE VOID | Space for Private Resonance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Settings */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #f5f5f5;
+            --text-muted: #888888;
+            --accent-gold: #d4af37;
+            --neon-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff);
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor */
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Hero Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Photo Zone Holographic Effect */
+        .holo-text {
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        /* Image Hover Zoom */
+        .img-container {
+            overflow: hidden;
+        }
+        .img-container img {
+            transition: transform 0.7s ease;
+        }
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 px-6 py-6 flex justify-between items-center mix-blend-difference">
+        <a href="#" class="text-2xl font-bold tracking-widest serif">THE VOID</a>
+        <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase">
+            <a href="#philosophy" class="hover:text-gray-400 transition">Concept</a>
+            <a href="#spaces" class="hover:text-gray-400 transition">Spaces</a>
+            <a href="#photozone" class="hover:text-gray-400 transition">Prism</a>
+            <a href="#visit" class="hover:text-gray-400 transition">Private Visit</a>
+        </div>
+        <button class="md:hidden text-white"><i class="fa-solid fa-bars text-xl"></i></button>
+    </nav>
+
+    <!-- Hero Section: 웅장함 (Grandeur) -->
+    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Parallax -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
+                 alt="Grand Interior" 
+                 class="w-full h-full object-cover opacity-40 scale-110"
+                 style="filter: grayscale(100%);">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0a0a0a]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4">
+            <p class="text-sm md:text-base text-gray-400 tracking-[0.3em] mb-4 fade-up delay-100 uppercase">Sanctuary in the City</p>
+            <h1 class="text-5xl md:text-8xl font-light serif mb-6 fade-up delay-200 leading-tight">
+                Overwhelming<br>Silence
+            </h1>
+            <p class="text-gray-400 max-w-lg mx-auto font-light leading-relaxed fade-up delay-300">
+                들어오는 순간 압도되는 층고, 그 아래 흐르는 정적.<br>
+                수많은 사람들 속에서도 온전히 나만의 방에 있는 듯한<br>
+                가장 거대하고도 아늑한 모순의 공간.
+            </p>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500">
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+    </header>
+
+    <!-- Philosophy Section: 아늑함 (Cozy) & 미니멀 (Minimal) -->
+    <section id="philosophy" class="py-32 px-6 md:px-20 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="fade-up">
+                <h2 class="text-4xl md:text-5xl serif mb-8 leading-snug">
+                    Gallery of<br><span class="text-gray-500 italic">Comfort</span>
+                </h2>
+                <p class="text-gray-400 leading-loose mb-6 text-justify">
+                    '더 보이드'는 갤러리처럼 절제된 미학을 추구하지만, 당신의 방처럼 편안합니다. 
+                    불필요한 장식은 덜어내고, 그 자리를 부드러운 조명과 최고급 패브릭 소파, 
+                    그리고 사람과 사람 사이의 충분한 '거리'로 채웠습니다.
+                </p>
+                <p class="text-gray-400 leading-loose text-justify">
+                    높은 층고가 주는 해방감 속에서, 몸을 감싸는 1인용 라운지 체어에 깊숙이 기대어 보세요. 
+                    하루 종일 머물러도 누구의 방해도 받지 않는 고요한 몰입을 선사합니다.
+                </p>
+            </div>
+            <div class="img-container rounded-sm overflow-hidden h-[500px] fade-up delay-200 relative">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop" 
+                     alt="Minimal Cozy Space" 
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-6 right-6 glass-card px-4 py-2 text-xs tracking-widest uppercase">
+                    Current Vibe: Calm
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Zone: 화려함 (Fancy/Photo Zone) -->
+    <!-- 미니멀한 흐름 속에서 반전 매력을 주는 섹션 -->
+    <section id="photozone" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black"></div>
+        <!-- Abstract Background Animation -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-20" 
+             style="background: radial-gradient(circle at 50% 50%, #3333ff, #ff00cc, transparent 70%); filter: blur(80px);"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-up">
+                <span class="text-xs font-bold tracking-widest uppercase text-[#ff00cc]">Insta-Worthy Spot</span>
+                <h2 class="text-5xl md:text-7xl serif mt-4 text-white">The <span class="holo-text">PRISM</span></h2>
+                <p class="mt-4 text-gray-400">단조로운 일상 속, 강렬한 빛의 파편이 되는 순간.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-[600px]">
+                <!-- Photo Zone 1 -->
+                <div class="group relative rounded-2xl overflow-hidden cursor-pointer fade-up delay-100">
+                    <img src="https://images.unsplash.com/photo-1496483353456-90996930e05b?q=80&w=2002&auto=format&fit=crop" 
+                         alt="Neon Tunnel" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 bg-black/40 backdrop-blur-sm">
+                        <p class="text-2xl font-bold serif border-b border-white pb-2">Infinity Mirror</p>
+                    </div>
+                </div>
+                <!-- Photo Zone 2 (Main) -->
+                <div class="group relative md:col-span-2 rounded-2xl overflow-hidden cursor-pointer fade-up delay-200">
+                    <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop" 
+                         alt="Light Installation" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100">
+                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black to-transparent">
+                        <h3 class="text-3xl serif mb-2">Dimension C</h3>
+                        <p class="text-sm text-gray-300">빛과 그림자가 교차하는 메인 포토 스팟. 당신이 서 있는 그곳이 작품이 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spaces & Privacy Logic: 핫플레이스 & 프라이빗 (Crowded but Private) -->
+    <section id="spaces" class="py-32 px-6 bg-[#0f0f0f]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-gray-800 pb-8 fade-up">
+                <div>
+                    <h2 class="text-4xl serif mb-2">Curated Zones</h2>
+                    <p class="text-gray-500">완벽하게 설계된 동선으로 군중 속의 고독을 즐기세요.</p>
+                </div>
+                <!-- Live Status Indicator -->
+                <div class="mt-6 md:mt-0 flex items-center gap-4 bg-[#1a1a1a] px-6 py-3 rounded-full border border-gray-800">
+                    <div class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </div>
+                    <div class="text-xs tracking-wider text-gray-300">
+                        <span class="block text-gray-500 text-[10px] uppercase">Current Vibe</span>
+                        HOT & BUSTLING
+                    </div>
+                    <div class="h-8 w-px bg-gray-700 mx-2"></div>
+                    <div class="text-xs tracking-wider text-gray-300">
+                        <span class="block text-gray-500 text-[10px] uppercase">Privacy Level</span>
+                        MAXIMUM (No Eye Contact)
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Zone Card 1 -->
+                <div class="bg-[#141414] p-8 rounded-xl border border-gray-800 hover:border-gray-600 transition fade-up delay-100">
+                    <div class="text-2xl mb-4 opacity-50">01</div>
+                    <h3 class="text-xl font-bold mb-4">The Grand Hall</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        300평 규모의 메인 홀. 웅장한 음악이 흐르지만, 좌석 간 3m 간격 배치와 하이백 소파로 옆 테이블의 대화가 들리지 않습니다.
+                    </p>
+                    <div class="w-full h-40 bg-gray-800 rounded overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596134894032-76788c7134e2?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover opacity-60">
+                    </div>
+                </div>
+
+                <!-- Zone Card 2 -->
+                <div class="bg-[#141414] p-8 rounded-xl border border-gray-800 hover:border-gray-600 transition fade-up delay-200">
+                    <div class="text-2xl mb-4 opacity-50">02</div>
+                    <h3 class="text-xl font-bold mb-4">Whisper Alcove</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        벽 속에 매립된 형태의 프라이빗 2인석. 핫플레이스의 열기는 느끼되, 시선은 완벽히 차단되어 둘만의 비밀스러운 대화가 가능합니다.
+                    </p>
+                    <div class="w-full h-40 bg-gray-800 rounded overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-60">
+                    </div>
+                </div>
+
+                <!-- Zone Card 3 -->
+                <div class="bg-[#141414] p-8 rounded-xl border border-gray-800 hover:border-gray-600 transition fade-up delay-300">
+                    <div class="text-2xl mb-4 opacity-50">03</div>
+                    <h3 class="text-xl font-bold mb-4">Deep Focus</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        오직 혼자 온 손님만을 위한 공간. 1인용 리클라이너와 개별 조도 조절이 가능하여 내 방보다 더 깊은 휴식을 제공합니다.
+                    </p>
+                    <div class="w-full h-40 bg-gray-800 rounded overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation / Visit -->
+    <section id="visit" class="py-24 bg-white text-black text-center">
+        <div class="max-w-2xl mx-auto px-6 fade-up">
+            <h2 class="text-3xl md:text-5xl serif mb-6">Secure Your Silence</h2>
+            <p class="text-gray-600 mb-10">
+                핫플레이스의 에너지는 현장에서 예약 없이 즐길 수 있습니다.<br>
+                하지만 완벽한 고립과 최고의 뷰를 원하신다면 프라이빗 패스를 예약하세요.
+            </p>
+            <button class="px-10 py-4 bg-black text-white rounded-full hover:bg-gray-800 transition transform hover:scale-105 duration-300 tracking-widest text-sm font-bold">
+                RESERVE NOW
+            </button>
+            <p class="mt-6 text-xs text-gray-400">* 시간당 입장 인원을 제한하여 쾌적한 밀도를 유지합니다.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-900 text-xs text-gray-500 text-center">
+        <p class="serif text-lg text-white mb-4">THE VOID</p>
+        <p class="mb-4">Seoul, South Korea</p>
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="#" class="hover:text-white">Instagram</a>
+            <a href="#" class="hover:text-white">Location</a>
+            <a href="#" class="hover:text-white">Contact</a>
+        </div>
+        <p>&copy; 2024 THE VOID SPACE. All Architecture Reserved.</p>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Add a slight delay to the outline for a smoother feel
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effect for links/buttons to expand cursor
+        const clickables = document.querySelectorAll('a, button, .cursor-pointer');
+        clickables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(255,255,255,0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Scroll Animation Logic (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Stop observing once visible
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
