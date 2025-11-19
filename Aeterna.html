@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETERNA - Timeless Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Styles */
+        :root {
+            --gold: #D4AF37;
+            --dark: #0F172A;
+            --paper: #F8F5F2;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--paper);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Selection Color */
+        ::selection {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* Image Hover Effect */
+        .img-container {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .img-container img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-overlay {
+            background: rgba(15, 23, 42, 0.0);
+            transition: background 0.5s ease;
+        }
+
+        .img-container:hover .img-overlay {
+            background: rgba(15, 23, 42, 0.2);
+        }
+
+        /* Grain Texture for "Classic" feel */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Decorative Lines */
+        .gold-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        /* Navigation Blur */
+        .glass-nav {
+            background: rgba(248, 245, 242, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <!-- Grain Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 glass-nav transition-all duration-300 border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold serif tracking-tighter z-50 relative group">
+                AETERNA
+                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-12 text-sm font-light tracking-widest uppercase text-gray-600">
+                <a href="#about" class="hover:text-[#D4AF37] transition-colors">Philosophy</a>
+                <a href="#gallery" class="hover:text-[#D4AF37] transition-colors">Works</a>
+                <a href="#contact" class="hover:text-[#D4AF37] transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button (Visual only) -->
+            <button class="md:hidden text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Abstract Background Element -->
+        <div class="absolute top-0 right-0 w-2/3 h-full bg-gray-100 -z-10 skew-x-12 translate-x-1/3 opacity-50"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-[#D4AF37] blur-[150px] opacity-20 -z-10"></div>
+
+        <div class="text-center px-6 max-w-5xl mx-auto z-10">
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-xs mb-6 fade-in-up font-semibold">Est. 2024 • Seoul</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-medium leading-tight mb-8 fade-in-up delay-100 text-gray-900">
+                <span class="italic text-gray-400">Modern</span> Simplicity,<br>
+                Classic <span class="italic serif text-[#D4AF37]">Grandeur</span>.
+            </h1>
+            <p class="text-gray-500 max-w-lg mx-auto mb-12 font-light leading-relaxed fade-in-up delay-200">
+                화려함 속에 숨겨진 절제미. 과거의 유산과 미래의 비전을 잇는 공간을 설계합니다.
+                우리는 시대를 초월한 아름다움을 만듭니다.
+            </p>
+            
+            <div class="fade-in-up delay-300">
+                <a href="#gallery" class="inline-block border border-gray-800 px-8 py-4 text-xs uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all duration-500">
+                    Explore Collection
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce duration-[3000ms]">
+            <span class="text-[10px] uppercase tracking-widest text-gray-400 mb-2">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gray-300 to-gray-600"></div>
+        </div>
+    </header>
+
+    <!-- Philosophy Section -->
+    <section id="about" class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="fade-in-up">
+                <div class="relative">
+                     <!-- Decorative abstract shape using CSS borders -->
+                    <div class="absolute -top-6 -left-6 w-24 h-24 border-t border-l border-[#D4AF37]"></div>
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 border-b border-r border-[#D4AF37]"></div>
+                    
+                    <!-- Placeholder for architectural detail -->
+                    <div class="img-container w-full h-[500px] bg-gray-200 relative group">
+                        <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=1000&auto=format&fit=crop" alt="Interior Detail" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="absolute inset-0 img-overlay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-in-up delay-200 md:pl-10">
+                <h2 class="text-4xl md:text-5xl mb-8 leading-tight">
+                    Details are not just details.<br>
+                    They make the <span class="italic text-[#D4AF37]">design</span>.
+                </h2>
+                <div class="gold-line w-20 mb-8"></div>
+                <p class="text-gray-600 font-light leading-relaxed mb-6">
+                    진정한 화려함은 복잡함에서 오지 않습니다. 완벽하게 정제된 단순함이야말로 가장 강력한 화려함입니다. 
+                    우리는 모던한 구조 속에 클래식한 질감을 입혀, 시간이 흘러도 변치 않는 가치를 공간에 담아냅니다.
+                </p>
+                <p class="text-gray-600 font-light leading-relaxed">
+                    자연광, 대리석, 그리고 금속. 가장 본질적인 재료들이 만나 만들어내는 하모니를 경험해보세요.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Text Divider -->
+    <div class="overflow-hidden border-y border-gray-200 py-4 bg-white">
+        <div class="whitespace-nowrap animate-marquee flex space-x-16 text-6xl md:text-8xl font-serif text-gray-100 select-none opacity-70">
+            <span>ELEGANCE</span>
+            <span class="italic font-sans font-thin">MODERNITY</span>
+            <span>CLASSIC</span>
+            <span class="italic font-sans font-thin">LUXURY</span>
+            <span>ELEGANCE</span>
+            <span class="italic font-sans font-thin">MODERNITY</span>
+            <span>CLASSIC</span>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 md:py-32 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in-up">
+                <div>
+                    <span class="text-[#D4AF37] uppercase tracking-widest text-xs font-semibold">Selected Works</span>
+                    <h2 class="text-3xl md:text-4xl mt-2">Curated Spaces</h2>
+                </div>
+                <div class="hidden md:block text-right">
+                    <p class="text-sm text-gray-500">2021 — 2024 Collection</p>
+                </div>
+            </div>
+
+            <!-- Modern Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group fade-in-up delay-100 cursor-pointer">
+                    <div class="img-container h-96 w-full mb-4 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Project 1">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-300 pb-2 group-hover:border-[#D4AF37] transition-colors">
+                        <h3 class="text-xl italic">The Obsidian Villa</h3>
+                        <span class="text-xs text-gray-500 uppercase">Residential</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 (Offset) -->
+                <div class="group fade-in-up delay-200 md:mt-16 cursor-pointer">
+                    <div class="img-container h-[500px] w-full mb-4 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Project 2">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-300 pb-2 group-hover:border-[#D4AF37] transition-colors">
+                        <h3 class="text-xl italic">Gallery O</h3>
+                        <span class="text-xs text-gray-500 uppercase">Cultural</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group fade-in-up delay-300 cursor-pointer">
+                    <div class="img-container h-80 w-full mb-4 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Project 3">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-gray-300 pb-2 group-hover:border-[#D4AF37] transition-colors">
+                        <h3 class="text-xl italic">Maison de Lumière</h3>
+                        <span class="text-xs text-gray-500 uppercase">Commercial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text Only Section (Classic typography focus) -->
+    <section class="py-32 px-6 bg-[#0F172A] text-[#F8F5F2] flex items-center justify-center text-center relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D4AF37] rounded-full opacity-5 blur-[120px]"></div>
+        
+        <div class="relative z-10 max-w-3xl fade-in-up">
+            <span class="block text-[#D4AF37] mb-6 text-2xl serif italic">Our Promise</span>
+            <h2 class="text-4xl md:text-6xl leading-tight mb-8 font-light">
+                "Simplicity is the ultimate <br> sophistication."
+            </h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm">— Leonardo da Vinci</p>
+        </div>
+    </section>
+
+    <!-- Contact / Footer -->
+    <footer id="contact" class="bg-white pt-24 pb-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#" class="text-3xl font-bold serif tracking-tighter block mb-6">AETERNA</a>
+                    <p class="text-gray-500 font-light max-w-sm">
+                        클래식한 감성과 현대적인 기능을 결합하여<br>
+                        당신의 비전을 현실로 만듭니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="uppercase text-xs font-bold tracking-widest mb-6 text-gray-900">Office</h4>
+                    <p class="text-gray-500 font-light text-sm leading-loose">
+                        123 Gangnam-daero,<br>
+                        Seoul, South Korea<br>
+                        +82 2 555 0123
+                    </p>
+                </div>
+                <div>
+                    <h4 class="uppercase text-xs font-bold tracking-widest mb-6 text-gray-900">Social</h4>
+                    <div class="flex flex-col space-y-2 text-sm font-light text-gray-500">
+                        <a href="#" class="hover:text-[#D4AF37] transition-colors">Instagram</a>
+                        <a href="#" class="hover:text-[#D4AF37] transition-colors">Behance</a>
+                        <a href="#" class="hover:text-[#D4AF37] transition-colors">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 uppercase tracking-wider">
+                <p>&copy; 2024 Aeterna Studio. All Rights Reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="hover:text-gray-900">Privacy</a>
+                    <a href="#" class="hover:text-gray-900">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Fade-in Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => observer.observe(el));
+            
+            // Manual Marquee animation fallback or adjustment if needed
+            // (Tailwind arbitrary values handles standard simple marquee)
+        });
+    </script>
+
+    <style>
+        /* Additional Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+</body>
+</html>
